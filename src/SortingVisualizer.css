@@ -1,0 +1,37 @@
+.visualizer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .array-container {
+    display: flex;
+    align-items: flex-end;
+    height: 500px;
+    width: 100%;
+  }
+  
+  .array-bar {
+    width: 8px;
+    margin: 0 2px;
+    background-color: turquoise;
+    transition: height 0.1s;
+  }
+  
+  .controls {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  input[type="range"] {
+    margin-left: 10px;
+    width: 200px;
+  }
+  
