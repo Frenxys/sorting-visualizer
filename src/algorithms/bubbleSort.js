@@ -20,13 +20,13 @@ export const bubbleSort = async (array, setArray, speed) => {
                 newArray[j + 1] = temp;
                 swapped = true; // A swap has occurred
             }
-
-            // Update the array in the visualizer
-            setArray([...newArray]);
-
-            // Introduce delay based on speed (make it faster)
-            await new Promise((resolve) => setTimeout(resolve, Math.max(1, (1000 - speed) / 10))); // Dividing by 10 to make it faster
         }
+
+        // Update the array in the visualizer only once per outer loop
+        setArray([...newArray]);
+
+        // Introduce delay based on speed (make it faster)
+        await new Promise((resolve) => setTimeout(resolve, Math.max(1, (1000 - speed) / 20))); // Divide by 20 for increased speed
 
         // If no two elements were swapped by inner loop, then break
         if (!swapped) break;
