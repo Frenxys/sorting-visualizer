@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { bubbleSort } from '../algorithms/sortingAlgorithms';
+import { bubbleSort } from '../algorithms/sortingAlgorithms'; // Make sure this path is correct
 import './SortingVisualizer.css';
 
 const SortingVisualizer = () => {
   const [array, setArray] = useState([]);
-  const [speed, setSpeed] = useState(100);
+  const [speed, setSpeed] = useState(100); // Speed initially set to 100 milliseconds
   const [sorting, setSorting] = useState(false);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ const SortingVisualizer = () => {
           Speed:
           <input
             type="range"
-            min="50"
-            max="1000"
+            min="1" // Adjusted minimum speed for faster sorting
+            max="1000" // Adjusted maximum speed
             value={speed}
             onChange={handleSpeedChange}
             disabled={sorting}
