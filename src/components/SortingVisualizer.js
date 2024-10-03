@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { bubbleSort } from '../algorithms/bubbleSort';
 import { selectionSort } from '../algorithms/selectionSort';
-import { useTheme } from '../ThemeContext'; // Import the theme context
-import AlgorithmModal from './AlgorithmModal'; // Import the AlgorithmModal
+import { mergeSort } from '../algorithms/mergeSort';
+import { useTheme } from '../ThemeContext';
+import AlgorithmModal from './AlgorithmModal';
 import './SortingVisualizer.css';
 
 const algorithms = [
     { name: 'Bubble Sort', description: 'A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.', value: 'bubble' },
     { name: 'Selection Sort', description: 'A comparison sorting algorithm that divides the input list into two parts: a sorted and an unsorted part.', value: 'selection' },
+    { name: 'Merge Sort', description: 'An efficient, stable, divide-and-conquer sorting algorithm.', value: 'merge' }
     // Add more algorithms here...
 ];
 
@@ -40,14 +42,17 @@ const SortingVisualizer = () => {
     }, [resetArray]);
 
     const startSort = async (algorithm) => {
-        setSorting(true); // Set sorting state to true
+        setSorting(true); // Imposta lo stato di ordinamento
         if (algorithm === 'bubble') {
-            await bubbleSort(array, setArray, speed); // Run bubble sort
+            await bubbleSort(array, setArray, speed);
         } else if (algorithm === 'selection') {
-            await selectionSort(array, setArray, speed); // Run selection sort
+            await selectionSort(array, setArray, speed);
+        } else if (algorithm === 'merge') {
+            await mergeSort(array, setArray, speed); 
         }
-        setSorting(false); // Set sorting state back to false
+        setSorting(false);
     };
+    
 
     const handleSpeedChange = (e) => {
         setSpeed(Number(e.target.value)); // Update speed based on slider input
