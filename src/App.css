@@ -1,4 +1,39 @@
 .App {
     text-align: center;
   }
-  
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.app.light {
+  background-color: white;
+  color: black;
+}
+
+.app.dark {
+  background-color: black;
+  color: white;
+}
+
+.array-bar {
+  width: 5px;
+  margin: 0 1px;
+  background-color: turquoise; /* Default bar color */
+  transition: background-color 0.5s;
+}
+
+.array-bar:hover {
+  background-color: orange; /* Color when hovered */
+}
+
+.array-bar {
+  /* When dark mode is active, change the bar color */
+  background-color: orange; /* This will be set based on the theme */
+}
+
+/* Additional styles for buttons and other elements can be added here */

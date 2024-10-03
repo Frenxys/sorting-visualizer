@@ -1,13 +1,22 @@
 import React from 'react';
-import SortingVisualizer from './components/SortingVisualizer';
-import './App.css';
+import { useTheme } from './ThemeContext';
+import SortingVisualizer from './components/SortingVisualizer'; // Adjust according to your file structure
+import './App.css'; // Make sure to include your styles
 
-function App() {
+const App = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
+
   return (
-    <div className="App">
+    <div className={isDarkMode ? 'app dark' : 'app light'}>
+      <header>
+        <h1>Sorting Algorithm Visualizer</h1>
+        <button onClick={toggleTheme}>
+          Switch to {isDarkMode ? 'Light' : 'Dark'} Mode
+        </button>
+      </header>
       <SortingVisualizer />
     </div>
   );
-}
+};
 
 export default App;

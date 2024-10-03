@@ -1,0 +1,61 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it appears above other content */
+}
+
+.modal-content {
+    background: var(--modal-bg-color); /* Use CSS variables for theming */
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px; /* Maximum width for the modal */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: var(--text-color); /* Adjust text color */
+}
+
+.algorithm-cards-container {
+    display: flex;
+    flex-direction: column; /* Change to column for better fit */
+    overflow-y: auto; /* Scroll vertically if necessary */
+    max-height: 400px; /* Limit height of the card container */
+    padding: 10px 0; /* Padding for the container */
+}
+
+.algorithm-card {
+    background-color: var(--card-bg-color); /* Use CSS variables for theming */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px 0; /* Space between cards */
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    color: var(--text-color); /* Adjust text color */
+}
+
+.algorithm-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    background-color: var(--button-hover-bg-color); /* Darker background on hover */
+}
