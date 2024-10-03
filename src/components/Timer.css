@@ -1,0 +1,12 @@
+.timer {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.timer h3 {
+    margin: 0;
+    color: #4682B4; /* Cambia il colore del timer a seconda del tema */
+}

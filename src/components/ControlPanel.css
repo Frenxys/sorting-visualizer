@@ -1,0 +1,33 @@
+.control-panel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.control-panel button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.control-panel button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.control-panel label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-panel input[type="range"],
+.control-panel input[type="number"] {
+    margin-top: 10px;
+    padding: 5px;
+}

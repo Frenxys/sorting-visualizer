@@ -4,13 +4,14 @@ import { selectionSort } from '../algorithms/selectionSort';
 import { mergeSort } from '../algorithms/mergeSort';
 import { useTheme } from '../ThemeContext';
 import AlgorithmModal from './AlgorithmModal';
+import Timer from './Timer';
+import ControlPanel from './ControlPanel';
 import './SortingVisualizer.css';
 
 const algorithms = [
-    { name: 'Bubble Sort', description: 'A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.', value: 'bubble' },
-    { name: 'Selection Sort', description: 'A comparison sorting algorithm that divides the input list into two parts: a sorted and an unsorted part.', value: 'selection' },
-    { name: 'Merge Sort', description: 'An efficient, stable, divide-and-conquer sorting algorithm.', value: 'merge' }
-    // Add more algorithms here...
+    { name: 'Bubble Sort', description: 'A simple sorting algorithm.', value: 'bubble' },
+    { name: 'Selection Sort', description: 'A comparison sorting algorithm.', value: 'selection' },
+    { name: 'Merge Sort', description: 'An efficient, stable sorting algorithm.', value: 'merge' }
 ];
 
 const SortingVisualizer = () => {
@@ -18,91 +19,62 @@ const SortingVisualizer = () => {
     const [speed, setSpeed] = useState(100);
     const [sorting, setSorting] = useState(false);
     const [arraySize, setArraySize] = useState(100);
-    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-    const [searchTerm, setSearchTerm] = useState(''); // State for search input
-    const [selectedAlgorithm, setSelectedAlgorithm] = useState(null); // State for selected algorithm
-    const { isDarkMode } = useTheme(); // Get the dark mode state
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+    const [timeElapsed, setTimeElapsed] = useState(0);
+    const { isDarkMode } = useTheme();
 
-    // Filter the algorithms based on the search term
-    const filteredAlgorithms = algorithms.filter(algorithm =>
-        algorithm.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    // Filter and reset the array
     const resetArray = useCallback(() => {
-        if (sorting) return; // Prevent resetting while sorting
-        const newArray = [];
-        for (let i = 0; i < arraySize; i++) {
-            newArray.push(randomIntFromInterval(5, 500)); // Generate random heights for bars
-        }
-        setArray(newArray); // Set the new array state
+        if (sorting) return;
+        const newArray = Array.from({ length: arraySize }, () => randomIntFromInterval(5, 500));
+        setArray(newArray);
     }, [arraySize, sorting]);
 
     useEffect(() => {
-        resetArray(); // Reset the array when the component mounts
+        resetArray();
     }, [resetArray]);
 
     const startSort = async (algorithm) => {
-        setSorting(true); // Imposta lo stato di ordinamento
+        setSorting(true);
+        const startTime = performance.now();
+
         if (algorithm === 'bubble') {
             await bubbleSort(array, setArray, speed);
         } else if (algorithm === 'selection') {
             await selectionSort(array, setArray, speed);
         } else if (algorithm === 'merge') {
-            await mergeSort(array, setArray, speed); 
+            await mergeSort(array, setArray, speed);
         }
+
+        const endTime = performance.now();
+        setTimeElapsed(((endTime - startTime) / 1000).toFixed(3)); // Time in seconds
         setSorting(false);
     };
-    
 
-    const handleSpeedChange = (e) => {
-        setSpeed(Number(e.target.value)); // Update speed based on slider input
-    };
-
-    const handleSizeChange = (e) => {
-        setArraySize(Number(e.target.value)); // Update array size based on input
-        resetArray(); // Reset array with new size
+    const handleSpeedChange = (value) => setSpeed(Number(value));
+    const handleSizeChange = (value) => {
+        setArraySize(Number(value));
+        resetArray();
     };
 
     return (
         <div className="visualizer-container">
-            <div className="controls">
-                <button onClick={() => setIsModalOpen(true)}>Change Algorithm</button> {/* Button to open modal */}
-                <button onClick={resetArray} disabled={sorting}>Reset Array</button> {/* Reset Button */}
-                {/* Show the Run Algorithm button only if an algorithm is selected */}
-                {selectedAlgorithm && (
-                    <button 
-                        onClick={() => {
-                            startSort(selectedAlgorithm); // Start the selected sorting algorithm
-                            setSelectedAlgorithm(null); // Reset selection after running
-                        }}
-                        disabled={sorting}
-                    >
-                        Run Algorithm
-                    </button>
-                )}
-                <label>
-                    Speed:
-                    <input
-                        type="range"
-                        min="1"
-                        max="1000"
-                        value={speed}
-                        onChange={handleSpeedChange}
-                        disabled={sorting}
-                    />
-                </label>
-                <label>
-                    Array Size:
-                    <input
-                        type="number"
-                        min="5"
-                        max="200"
-                        value={arraySize}
-                        onChange={handleSizeChange}
-                        disabled={sorting}
-                    />
-                </label>
-            </div>
+            {/* Control Panel with the Timer */}
+            <ControlPanel
+                setIsModalOpen={setIsModalOpen}
+                resetArray={resetArray}
+                selectedAlgorithm={selectedAlgorithm}
+                startSort={startSort}
+                sorting={sorting}
+                speed={speed}
+                arraySize={arraySize}
+                handleSpeedChange={handleSpeedChange}
+                handleSizeChange={handleSizeChange}
+            />
+            <Timer timeElapsed={timeElapsed} />
+
+            {/* Visual Array Bars */}
             <div className="array-container">
                 {array.map((value, idx) => (
                     <div
@@ -110,30 +82,26 @@ const SortingVisualizer = () => {
                         key={idx}
                         style={{
                             height: `${value}px`,
-                            backgroundColor: isDarkMode ? '#ff8c00' : '#4682b4', // Set color based on theme
+                            backgroundColor: isDarkMode ? '#ff8c00' : '#4682b4',
                         }}
                     ></div>
                 ))}
             </div>
-            {/* Modal for selecting sorting algorithms */}
+
+            {/* Algorithm Selection Modal */}
             <AlgorithmModal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
-                algorithms={filteredAlgorithms}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                algorithms={algorithms}
                 onSelect={(algorithmName) => {
-                    // Update selected algorithm and close modal after selecting
-                    setSelectedAlgorithm(algorithms.find(alg => alg.name === algorithmName)?.value); 
+                    setSelectedAlgorithm(algorithms.find(alg => alg.name === algorithmName)?.value);
                     setIsModalOpen(false);
                 }}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm} // Pass the state for the search input
             />
         </div>
     );
 };
 
-const randomIntFromInterval = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min); // Generate a random integer
-};
+const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 export default SortingVisualizer;

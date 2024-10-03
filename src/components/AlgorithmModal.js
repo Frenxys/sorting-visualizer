@@ -1,20 +1,13 @@
 import React from 'react';
 import './AlgorithmModal.css';
 
-const AlgorithmModal = ({ isOpen, algorithms, onClose, onSelect, searchTerm, setSearchTerm }) => {
-    if (!isOpen) return null; // Don't render anything if the modal is not open
+const AlgorithmModal = ({ isOpen, algorithms, onClose, onSelect }) => {
+    if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Select a Sorting Algorithm</h2>
-                <input
-                    type="text"
-                    placeholder="Search algorithm..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-                    style={{ marginBottom: '1rem', padding: '0.5rem', borderRadius: '4px', width: '100%' }}
-                />
+                <h2>Select Sorting Algorithm</h2>
                 <div className="algorithm-cards-container">
                     {algorithms.map((algorithm) => (
                         <div 
@@ -22,7 +15,7 @@ const AlgorithmModal = ({ isOpen, algorithms, onClose, onSelect, searchTerm, set
                             className="algorithm-card"
                             onClick={() => {
                                 onSelect(algorithm.name);
-                                onClose(); // Close the modal after selecting
+                                onClose();
                             }}
                         >
                             <h3>{algorithm.name}</h3>
