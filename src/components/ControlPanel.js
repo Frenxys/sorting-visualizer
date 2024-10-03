@@ -17,9 +17,10 @@ const ControlPanel = ({
             <button onClick={() => setIsModalOpen(true)} disabled={sorting}>
                 Change Algorithm
             </button>
-            <button onClick={resetArray} disabled={sorting}>Reset Array</button>
+            <button onClick={resetArray} disabled={sorting}>
+                Reset Array
+            </button>
 
-            {/* Show Run button only if an algorithm is selected */}
             {selectedAlgorithm && (
                 <button 
                     onClick={() => startSort(selectedAlgorithm)} 
@@ -36,7 +37,7 @@ const ControlPanel = ({
                     min="1"
                     max="1000"
                     value={speed}
-                    onChange={(e) => handleSpeedChange(e.target.value)}
+                    onChange={(e) => handleSpeedChange(Number(e.target.value))} // Converti il valore in un numero
                     disabled={sorting}
                 />
             </label>
@@ -48,7 +49,7 @@ const ControlPanel = ({
                     min="5"
                     max="200"
                     value={arraySize}
-                    onChange={(e) => handleSizeChange(e.target.value)}
+                    onChange={(e) => handleSizeChange(Number(e.target.value))} // Converti il valore in un numero
                     disabled={sorting}
                 />
             </label>
