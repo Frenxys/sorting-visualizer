@@ -54,7 +54,7 @@ export const selectionSort = async (array, setArray, speed) => {
         setArray([...newArray]);
 
         // Introduce delay based on speed
-        await new Promise((resolve) => setTimeout(resolve, Math.max(1, (1000 - speed) / 5))); // Speed adjustment
+        await new Promise((resolve) => setTimeout(resolve, Math.max(1, (1000 - speed) / 20))); // Speed adjustment
     }
 
     // Final marking of sorted elements
