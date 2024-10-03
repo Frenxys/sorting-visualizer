@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Sorting Algorithm Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a sorting algorithm visualizer built using React. It allows users to visually understand how different sorting algorithms work by animating the sorting process with colorful bars representing the data being sorted.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Visual representation of various sorting algorithms.
+- Interactive controls to adjust the speed of the sorting process.
+- Ability to generate new random arrays for sorting.
 
-### `npm start`
+## Available Sorting Algorithms
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Here is a list of sorting algorithms implemented in this visualizer:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Bubble Sort**: A simple comparison-based algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+2. **Selection Sort**: This algorithm divides the input list into two parts: a sorted and an unsorted part. It repeatedly selects the smallest (or largest) element from the unsorted part and moves it to the sorted part.
+3. **Insertion Sort**: Builds a sorted array one element at a time by comparing each new element to the already sorted elements and inserting it in the correct position.
+4. **Merge Sort**: A divide-and-conquer algorithm that splits the array into halves, sorts each half, and then merges the sorted halves back together.
+5. **Quick Sort**: Another divide-and-conquer algorithm that selects a 'pivot' element and partitions the array into elements less than and greater than the pivot, then recursively sorts the partitions.
+6. **Heap Sort**: Converts the array into a heap data structure and then repeatedly extracts the maximum element from the heap and rebuilds the heap until the array is sorted.
+7. **Shell Sort**: An optimization of insertion sort that allows the exchange of items that are far apart by comparing elements at a certain gap.
+8. **Counting Sort**: An integer sorting algorithm that counts the occurrences of each unique element in the array, then calculates the position of each element in the sorted array.
+9. **Radix Sort**: A non-comparison-based sorting algorithm that sorts numbers by processing individual digits. It uses counting sort as a subroutine.
+10. **Bucket Sort**: Divides the array into a finite number of buckets, sorts each bucket individually, and then concatenates the results.
+11. **Tim Sort**: A hybrid sorting algorithm derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data.
+12. **Comb Sort**: An improvement over bubble sort that eliminates small values near the end of the list, making the algorithm faster.
+13. **Pigeonhole Sort**: A sorting algorithm that is suitable for sorting lists of elements where the number of elements is known and the range of values is not significantly larger than the number of elements.
+14. **Cycle Sort**: An in-place, non-comparison-based sorting algorithm that minimizes the number of writes to the original array.
+15. **Bitonic Sort**: A parallel algorithm that works on bitonic sequences, sorting the elements by recursively merging two halves of the sequence.
+16. **Gnome Sort**: A simple algorithm that sorts an array by iterating through it and swapping elements until the array is sorted.
+17. **Odd-Even Sort**: A parallel sorting algorithm that works by alternating between odd and even phases, comparing and swapping elements.
+18. **Flashsort**: A distribution sorting algorithm that is especially efficient when the input is uniformly distributed.
+19. **Bead Sort**: A non-comparison-based sorting algorithm that simulates the movement of beads on a wire, providing a visual representation of sorting.
+20. **Sleep Sort**: A humorous sorting algorithm that works by making threads sleep for a duration proportional to the values of the numbers being sorted.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run this project locally, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Frenxys/sorting-visualizer.git
+   cd sorting-visualizer
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open your browser and navigate to http://localhost:3000 to view the app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Contributions are welcome! If you have suggestions for improvements or additional algorithms to implement, feel free to submit a pull request.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
