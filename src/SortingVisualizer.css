@@ -62,3 +62,46 @@
     width: 90%;
     max-width: 500px;
 }
+.visualizer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.visualizer-container {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.execution-table {
+  width: 300px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.execution-table h3 {
+  text-align: center;
+}
+
+.execution-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.execution-table th, .execution-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.execution-table th {
+  background-color: #333;
+  color: white;
+}
+
+.execution-table td {
+  background-color: #fff;
+  color: #333;
+}
