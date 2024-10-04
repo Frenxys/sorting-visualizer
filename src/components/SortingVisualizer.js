@@ -4,6 +4,8 @@ import { selectionSort } from '../algorithms/selectionSort';
 import { mergeSort } from '../algorithms/mergeSort';
 import { quickSort } from '../algorithms/quickSort';
 import { heapSort } from '../algorithms/heapSort';
+import { shellSort } from '../algorithms/shellSort';
+import { bogoSort } from '../algorithms/bogoSort';
 import { useTheme } from '../ThemeContext';
 import ControlPanel from './ControlPanel';
 import AlgorithmModal from './AlgorithmModal';
@@ -14,7 +16,9 @@ const algorithms = [
     { name: 'Selection Sort', value: 'selection' },
     { name: 'Merge Sort', value: 'merge' },
     { name: 'Quick Sort', value: 'quick' },
-    { name: 'Heap Sort', value: 'heap' }
+    { name: 'Heap Sort', value: 'heap' },
+    { name: 'Shell Sort', value: 'shell' },
+    { name: 'Bogo Sort', value: 'bogo' }
 ];
 
 const SortingVisualizer = () => {
@@ -56,6 +60,12 @@ const SortingVisualizer = () => {
                 break;
             case 'heap':
                 await heapSort(array, setArray, speed);
+                break;
+            case 'shell':
+                await shellSort(array, setArray, speed);
+                break;
+            case 'bogo':
+                await bogoSort(array, setArray, speed);
                 break;
             default:
                 break;
