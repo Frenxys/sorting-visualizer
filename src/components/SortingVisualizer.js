@@ -123,6 +123,11 @@ const SortingVisualizer = () => {
                 </div>
             </div>
 
+            {/* Visualizza l'algoritmo selezionato */}
+            <div className="algorithm-info">
+                <h3>Selected Algorithm: {selectedAlgorithm ? algorithms.find(alg => alg.value === selectedAlgorithm)?.name : "None"}</h3>
+            </div>
+
             <div className="execution-table">
                 <h3>Recent Sorting Times</h3>
                 <table>
