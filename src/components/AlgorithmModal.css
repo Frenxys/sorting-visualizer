@@ -59,3 +59,12 @@
 .close-modal:hover {
     background-color: var(--button-hover-bg-color); /* Darker background on hover */
 }
+.algorithm-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.algorithm-info h3 {
+    font-size: 24px;
+    color: #333;
+}
