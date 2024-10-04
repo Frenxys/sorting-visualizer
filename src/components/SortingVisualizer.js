@@ -3,6 +3,7 @@ import { bubbleSort } from '../algorithms/bubbleSort';
 import { selectionSort } from '../algorithms/selectionSort';
 import { mergeSort } from '../algorithms/mergeSort';
 import { quickSort } from '../algorithms/quickSort';
+import { heapSort } from '../algorithms/heapSort';
 import { useTheme } from '../ThemeContext';
 import ControlPanel from './ControlPanel';
 import AlgorithmModal from './AlgorithmModal';
@@ -12,7 +13,8 @@ const algorithms = [
     { name: 'Bubble Sort', value: 'bubble' },
     { name: 'Selection Sort', value: 'selection' },
     { name: 'Merge Sort', value: 'merge' },
-    { name: 'Quick Sort', value: 'quick' }
+    { name: 'Quick Sort', value: 'quick' },
+    { name: 'Heap Sort', value: 'heap' }
 ];
 
 const SortingVisualizer = () => {
@@ -51,6 +53,9 @@ const SortingVisualizer = () => {
                 break;
             case 'quick':
                 await quickSort(array, setArray, speed);
+                break;
+            case 'heap':
+                await heapSort(array, setArray, speed);
                 break;
             default:
                 break;
