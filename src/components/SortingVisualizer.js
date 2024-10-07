@@ -1,11 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { bubbleSort } from '../algorithms/bubbleSort';
-import { selectionSort } from '../algorithms/selectionSort';
-import { mergeSort } from '../algorithms/mergeSort';
-import { quickSort } from '../algorithms/quickSort';
-import { heapSort } from '../algorithms/heapSort';
-import { shellSort } from '../algorithms/shellSort';
-import { bogoSort } from '../algorithms/bogoSort';
 import { useTheme } from '../ThemeContext';
 import ControlPanel from './ControlPanel';
 import AlgorithmModal from './AlgorithmModal';
@@ -41,34 +34,25 @@ const SortingVisualizer = () => {
     resetArray();
   }, [resetArray]);
 
+  // import algorithms dynamically
+  const loadAlgorithm = async (algorithm) => {
+    try {
+      const module = await import(`../algorithms/${algorithm}Sort`);
+      return module.sort;
+    } catch (error) {
+      console.error(`Failed to load algorithm: ${algorithm}`, error);
+    }
+  };
+
   const startSort = async (algorithm) => {
     setSorting(true);
     const startTime = performance.now();
 
-    switch (algorithm) {
-      case 'bubble':
-        await bubbleSort(array, setArray, speed);
-        break;
-      case 'selection':
-        await selectionSort(array, setArray, speed);
-        break;
-      case 'merge':
-        await mergeSort(array, setArray, speed);
-        break;
-      case 'quick':
-        await quickSort(array, setArray, speed);
-        break;
-      case 'heap':
-        await heapSort(array, setArray, speed);
-        break;
-      case 'shell':
-        await shellSort(array, setArray, speed);
-        break;
-      case 'bogo':
-        await bogoSort(array, setArray, speed);
-        break;
-      default:
-        break;
+
+    const sortAlgorithm = await loadAlgorithm(algorithm);
+    
+    if (sortAlgorithm) {
+      await sortAlgorithm(array, setArray, speed); // Avvia l'algoritmo
     }
 
     const endTime = performance.now();
@@ -132,7 +116,6 @@ const SortingVisualizer = () => {
               key={idx}
               style={{
                 height: `${value}px`,
-                width: `${100 / array.length}%`,
                 backgroundColor: isDarkMode ? '#ff8c00' : '#4682b4',
               }}
             ></div>
