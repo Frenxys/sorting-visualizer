@@ -9,76 +9,65 @@
 
 .array-container {
   display: flex;
-  justify-content: center; /* Center the bars */
-  margin: 20px 0; /* Margin above and below the array */
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0;
 }
 
 .array-bar {
-  width: 5px; /* Width of each bar */
-  margin: 0 1px; /* Margin between bars */
+  flex: 1;
+  margin: 0 1px;
+  background-color: orange;
   transition: background-color 0.5s;
 }
 
-/* Additional styles for light/dark theme */
 .app.light .array-bar {
-  background-color: turquoise; /* Light theme color */
+  background-color: #4682b4;
 }
 
 .app.dark .array-bar {
-  background-color: orange; /* Dark theme color */
+  background-color: #ff8c00;
 }
 
-
-
-  button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  input[type="range"] {
-    margin-left: 10px;
-    width: 200px;
-  }
-
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;
+button:hover {
+  background-color: #45a049;
 }
+
+input[type="range"] {
+  margin-left: 10px;
+  width: 200px;
+}
+
 .visualizer-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
-}
-
-.visualizer-container {
-  flex-grow: 1;
-  margin-right: 20px;
+  flex-wrap: wrap;
 }
 
 .execution-table {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   background-color: #f0f0f0;
   padding: 10px;
   border-radius: 10px;
+  margin-top: 20px;
 }
 
 .execution-table h3 {
@@ -104,4 +93,15 @@
 .execution-table td {
   background-color: #fff;
   color: #333;
+}
+
+@media (max-width: 768px) {
+  .visualizer-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .visualizer-container {
+    margin-right: 0;
+  }
 }
