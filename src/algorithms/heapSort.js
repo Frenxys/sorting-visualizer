@@ -1,4 +1,4 @@
-export const heapSort = async (array, setArray, speed) => {
+export const sort = async (array, setArray, speed) => {
     let n = array.length;
 
     for (let i = Math.floor(n / 2 - 1); i >= 0; i--) {
