@@ -1,24 +1,22 @@
-export const shellSort = async (array, setArray, speed) => {
-    let n = array.length;
-
-    for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-        
-        for (let i = gap; i < n; i++) {
-            let temp = array[i];
-            let j;
-
-            for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
-                array[j] = array[j - gap];
-                setArray([...array]); 
-                await sleep(speed);   
-            }
-            array[j] = temp;
-            setArray([...array]);  
-            await sleep(speed);   
+export const sort = async (array, setArray, speed) => {
+    const newArray = [...array];
+    let length = newArray.length;
+    let gap = Math.floor(length / 2);
+  
+    while (gap > 0) {
+      for (let i = gap; i < length; i++) {
+        let temp = newArray[i];
+        let j = i;
+        while (j >= gap && newArray[j - gap] > temp) {
+          newArray[j] = newArray[j - gap];
+          j -= gap;
+          setArray([...newArray]);
+          await new Promise((resolve) => setTimeout(resolve, Math.max(1, (1000 - speed) / 20)));
         }
+        newArray[j] = temp;
+        setArray([...newArray]);
+      }
+      gap = Math.floor(gap / 2);
     }
-};
-
-const sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
+  };
+  

@@ -4,16 +4,6 @@ import ControlPanel from './ControlPanel';
 import AlgorithmModal from './AlgorithmModal';
 import './SortingVisualizer.css';
 
-const algorithms = [
-  { name: 'Bubble Sort', value: 'bubble' },
-  { name: 'Selection Sort', value: 'selection' },
-  { name: 'Merge Sort', value: 'merge' },
-  { name: 'Quick Sort', value: 'quick' },
-  { name: 'Heap Sort', value: 'heap' },
-  { name: 'Shell Sort', value: 'shell' },
-  { name: 'Bogo Sort', value: 'bogo' }
-];
-
 const SortingVisualizer = () => {
   const [array, setArray] = useState([]);
   const [speed, setSpeed] = useState(100);
@@ -22,6 +12,7 @@ const SortingVisualizer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
   const [executionTimes, setExecutionTimes] = useState([]);
+  const [algorithms, setAlgorithms] = useState([]);
   const { isDarkMode } = useTheme();
 
   const resetArray = useCallback(() => {
@@ -34,7 +25,6 @@ const SortingVisualizer = () => {
     resetArray();
   }, [resetArray]);
 
-  // import algorithms dynamically
   const loadAlgorithm = async (algorithm) => {
     try {
       const module = await import(`../algorithms/${algorithm}Sort`);
@@ -44,15 +34,27 @@ const SortingVisualizer = () => {
     }
   };
 
+  const loadAlgorithms = () => {
+    const context = require.context('../algorithms', true, /Sort\.js$/);
+    const availableAlgorithms = context.keys().map((file) => {
+      const algorithmName = file.match(/\.\/(.*)Sort\.js/)[1];
+      return { name: algorithmName.replace(/([A-Z])/g, ' $1').trim() + ' Sort', value: algorithmName.toLowerCase() };
+    });
+    setAlgorithms(availableAlgorithms);
+  };
+
+  useEffect(() => {
+    loadAlgorithms();
+  }, []);
+
   const startSort = async (algorithm) => {
     setSorting(true);
     const startTime = performance.now();
 
-
     const sortAlgorithm = await loadAlgorithm(algorithm);
-    
+
     if (sortAlgorithm) {
-      await sortAlgorithm(array, setArray, speed); // Avvia l'algoritmo
+      await sortAlgorithm(array, setArray, speed);
     }
 
     const endTime = performance.now();
@@ -61,10 +63,10 @@ const SortingVisualizer = () => {
     setExecutionTimes((prevTimes) => [
       ...prevTimes,
       {
-        algorithmName: algorithms.find((alg) => alg.value === algorithm).name,
+        algorithmName: algorithms.find((alg) => alg.value === algorithm)?.name || 'Unknown',
         timeElapsed: `${timeElapsed} ms`,
-        date: new Date().toLocaleString()
-      }
+        date: new Date().toLocaleString(),
+      },
     ]);
 
     setSorting(false);
@@ -149,9 +151,9 @@ const SortingVisualizer = () => {
         </table>
       </div>
 
-      <AlgorithmModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <AlgorithmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         algorithms={algorithms}
         onSelect={(algorithmName) => {
           setSelectedAlgorithm(algorithms.find(alg => alg.name === algorithmName)?.value);
