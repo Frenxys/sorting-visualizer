@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AlgorithmModal.css';
 
 const AlgorithmModal = ({ isOpen, algorithms, onClose, onSelect }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+
     if (!isOpen) return null;
+
+    const filteredAlgorithms = algorithms.filter((algorithm) =>
+        algorithm.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
                 <h2>Select Sorting Algorithm</h2>
+                <input
+                    type="text"
+                    placeholder="Search algorithms..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                />
                 <div className="algorithm-cards-container">
-                    {algorithms.map((algorithm) => (
+                    {filteredAlgorithms.map((algorithm) => (
                         <div 
                             key={algorithm.name} 
                             className="algorithm-card"

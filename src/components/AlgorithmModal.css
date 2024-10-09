@@ -68,3 +68,17 @@
     font-size: 24px;
     color: #333;
 }
+.search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid var(--border-color); /* Aggiungi un colore di bordo */
+    border-radius: 5px;
+    width: 100%; /* Larghezza al 100% */
+    box-sizing: border-box; /* Assicura che il padding non influisca sulla larghezza */
+    color: var(--text-color); /* Colore del testo */
+    background-color: var(--input-bg-color); /* Colore di sfondo per l'input */
+}
+
+.search-input::placeholder {
+    color: var(--placeholder-color); /* Colore del placeholder */
+}
